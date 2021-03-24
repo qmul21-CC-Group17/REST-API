@@ -11,8 +11,8 @@ def create_connection():
     """
     conn = mysql.connector.connect(
         host="group17-githubjobs.cbgj5urfzqbw.us-east-1.rds.amazonaws.com",
-        user="group17Admin",
-        password="Group17Password",
+        user="", # login required
+        password="", # password required
         database="JobSearchAPI"
     )
     return conn
