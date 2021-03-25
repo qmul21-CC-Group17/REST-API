@@ -7,6 +7,8 @@ The database consists of two tables:
   - user_id
   - username
   - password
+  - login_count
+  - last_login
 - user:
   - user_id
   - name
