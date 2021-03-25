@@ -98,14 +98,24 @@ def login():
             mycursor.execute('SELECT user_id, admin FROM user WHERE user_id = %s', (session['id'],))
             user_admin = mycursor.fetchone()
             session['admin'] = user_admin[1]
+            # get the no of time logged in
+            mycursor.execute('SELECT user_id, login_count FROM login WHERE user_id = %s', (session['id'],))
+            user_login = mycursor.fetchone()
+            login_number = user_login[1]
+            login_number += 1
+            # create a variable for date
+            #today = str(date.today())
+            # update the table
+            mycursor.execute('UPDATE login SET login_count = %s, last_login = NOW() WHERE user_id = %s', (login_number, session['id'],))
+            conn.commit()
             # The user has been logged in
-            msg = 'Logged in successfully!'
+            msg = f'Logged in successfully!'
             return jsonify({'message': msg}), 200
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
             return jsonify({'message': msg}), 401
-
+        
 @app.route('/logout', methods=['GET'])
 def logout():
     # Remove session data, this will log the user out
@@ -121,7 +131,12 @@ def logout():
 @app.route('/admin/users', methods=['GET'])
 def get_all_users():
     if session['admin'] == 1:
-        mycursor.execute("SELECT * FROM user")
+        mycursor.execute("""SELECT login.user_id, login.username, \
+            login.login_count, login.last_login, \
+            user.name, user.email, user.admin, user.keyword, \
+            user.full_time, user.location \
+            FROM login \
+            INNER JOIN user ON login.user_id = user.user_id""")
         myresults = mycursor.fetchall()
         return jsonify(myresults), 200
     else:
