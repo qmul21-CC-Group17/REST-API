@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, json, request, url_for, session, render_template
+from flask import Flask, jsonify, json, request, url_for, session
 import mysql.connector
+import requests
 from passlib.hash import sha256_crypt
 import re
 
@@ -170,8 +171,27 @@ def delete_account():
 # includes the use of externap API
 @app.route('/get_jobs', methods=['GET'])
 def get_jobs():
-    pass
-    #TODO
+    msg = 'login required'
+    if session['loggedin'] == True:
+        job_template = 'https://jobs.github.com/positions.json?description={job}&location={loc}&full_time={fu}'
+        mycursor.execute('SELECT * FROM user WHERE user_id = %s', (session['id'],))
+        get_job = mycursor.fetchone()
+        location = get_job[6]
+        location = location.replace(" ","+")# replaces any blank spaces with + character so it works in the URL format
+        desc = get_job[4]
+        desc = desc.replace(" ","+") # replaces any blank spaces with + character so it works in the URL format
+        ft =  get_job[5] # can take values 'on' and 'off'
+        job_url = job_template.format(job = desc, loc = location, fu = ft)
+        resp = requests.get(job_url)
+        if resp.ok:
+            if len(resp.json()) == 0:
+                return jsonify({'message': 'No jobs found'}), 200
+            else:
+                return jsonify(resp.json()), 200
+        else:
+            print(resp.reason)
+    else: 
+         return jsonify({'message': msg}), 400
 
 if __name__ == '__main__':
     conn = create_connection()
