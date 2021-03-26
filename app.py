@@ -158,15 +158,24 @@ def admin_amend_user():
 # amend user details
 @app.route('/amend_user', methods=['PUT'])
 def amend_user():
-    pass
-    #TODO
+    #check if the user is logged in
+    id = session['id']
+    email = request.form['email'] #new email
+    keyword = request.form['keyword']#new keyword
+    location = request.form['location']#new location
+    mycursor.execute('UPDATE user SET email = %s, keyword = %s, location = %s WHERE user_id = %d', (email, keyword, location, id))
+    mysql.connection.commit()
+    msg = 'successfully updated!'
+        return jsonify({'message':msg}), 200
 
 # delete an account
 @app.route('/delete_account', methods=['DELETE'])
 def delete_account():
-    pass
-    #TODO
-
+    id = session.pop(id, None)
+    mycursor.execute('DELETE FROM user WHERE user_id = %d',(id))
+    mysql.connection.commit()
+    msg = 'successfully deleted!'
+        return jsonify({'message':msg}), 200
 # get jobs
 # includes the use of externap API
 @app.route('/get_jobs', methods=['GET'])
