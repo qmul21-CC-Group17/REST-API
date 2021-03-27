@@ -1,19 +1,25 @@
 # REST-API
 
-## The Database
-The database for this project is hosted in AWS and is an RDS instance of MySQL database.<br>
-The database consists of two tables:
-- login:
-  - user_id
-  - username
-  - password
-  - login_count
-  - last_login
-- user:
-  - user_id
-  - name
-  - email
-  - admin
-  - keyword
-  - full_time
-  - location
+## Activate virtual env 
+``` source .env/bib/activate ```
+
+## install packages
+``` pip install -r requirements.txt ```
+## db setup
+``` export FLASK_APP=run.py ```
+``` flask db init ```
+``` flask db migrate ```
+``` flask db upgrade ```
+
+## load db with sample users along with admin
+``` python add_users.py ```
+
+## start flask server
+``` python run.py ```
+
+### open swagger docs in the brower by fllowing the base url
+
+### To do
+- My SQL db setup
+- Dockerize application
+- Add https functionality
