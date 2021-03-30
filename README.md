@@ -8,7 +8,7 @@
 This application allows a user to create an account and search for full-time or part-time IT positions of any kind in any given location. The application makes use of the <b> GitHub Jobs Public API to return a JSON response of all the jobs for the given information.</b>
 The app is <b>dockerized</b> and can be run on a <b>virtual machine on AWS</b>. 
 
-## DYNAMIC REST-API CRUD Operations: 
+## Dynamic REST-API CRUD Operations: 
 The REST API responses conform to REST standards and return appropriate messages along with <b>RESPONSE CODES.</b>
 
 ### GET
@@ -27,29 +27,30 @@ The REST API responses conform to REST standards and return appropriate messages
 ## Interaction with External REST Service:
 GET_JOBS method uses the <a href="https://jobs.github.com/api" GITHUB-JOBS API</a> to QUERY JOBS using the information provided by the user in the CREATE_USER POST method. THE API RETURNS A JSON RESPONSE of the list of jobs in the given location. This method can only be accessed after user_login. 
 
-## EXTERNAL CLOUD DATABASE:
+## External Cloud Database:
 A remote access <b>MYSQL DATABASE hosted on AWS</b> is used by the web-application to store and retrieve persistent information such as: user details and blacklisted authorization tokens.
 
-## SERVING THE APPLICATION OVER HTTPS
+## Serving the Application over HTTPS:
+- TO DO 
 
-## HASH-BASED AUTHENTICATION:
-### B-CRYPT HASH ENCRYPTED PASSWORDS
-When creating a user, the password entered through POST method is first hashed by BCRYPT algorithm using a secret key and this hash is stored in the USER database. 
+## Hash Based Authentication:
+### B-CRYPT Hash Encrypted Passwords
+When creating a user account, the password entered through POST method is first hashed by BCRYPT algorithm using a secret key and this hash is stored in the USER database. 
 When a user is logging in, the user is AUTHENTICATED BY HASHING THE ENTERED PASSWORD AND COMPARING WITH THE HASH IN THE DATABASE, and only valid hashes are allowed to proceed.
 
 
-## USER ACCOUNTS AND ACCESS MANAGEMENT
-### JWT FOR KEEPING TRACK OF USER SESSIONS AND AUTHORIZATION: 
+## User Accounts and Access Management:
+### JWT for Keeping Track of Sessions and Authorization
 <b>JSON WEB TOKENS are generated every time a user registers or logs in</b>. This token is used to create a <b>SESSION</b> for the user that will last <b>upto 24-hours unless they logout</b>. This token is then used to access REST METHODS that require user login. <b>ONLY VALID TOKENS are authorized to perform CRUD operations</b>. Once the user is logged out, the TOKEN is <b> added to the list of blacklisted tokens</b> so that it may never be used again. Thus <b>securing the application.</b>
 
-## SECURING THE DATABASE WITH ROLE-BASED POLICIES
-### ADMIN AND USER ROLES 
+## Securing the Database with Role-Based Policies:
+### ADMIN & USER Roles
 - USER role is only allowed to access the method create__user, get_jobs, update_user to update their own details, and delete_user to delete ONLY THEIR OWN ACCOUNT. 
 - ADMIN role is allowed to use the method list_users to see all the details of the user-role users who have accounts on the app. 
 <b>THE ROLES AND THEIR AUTHORIZATION ARE VERIFIED USING VALID ADMIN JWTs. THUS ONLY ADMIN HAS TRUE ACCESS TO THE USER DATABASE, THUS SECURING THE DATABASE. </b>
  ONE ADMIN ACCOUNT IS CREATED UPON RUNNING FIRST INSTANCE OF THE APP.
 
-## REQUIREMENTS: 
+## Requirements: 
 Python 3.8, Docker.io, Flask, Flask-Bcrypt, Flask-Migrate, flask-restx, 
 Flask-Script, Flask-SQLAlchemy, PyJWT, requests, SQLAlchemy, 
 mysqlclient, mysql-connector, pymysql
