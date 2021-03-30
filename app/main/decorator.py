@@ -8,8 +8,9 @@ def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         data, status = AuthHelper.get_loged_in_user(request)
-        if data.get('user_data'):
-            return func(*args, **kwargs)
+        if status == 200:
+            if data.get('user_data'):
+                return func(*args, **kwargs)
         return data, status
     
     return wrapper

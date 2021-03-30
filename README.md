@@ -1,8 +1,5 @@
 # REST-API
 
-## Activate virtual env 
-``` source .env/bib/activate ```
-
 ## install packages
 ``` pip install -r requirements.txt ```
 ## db setup
@@ -23,3 +20,11 @@
 - My SQL db setup
 - Dockerize application
 - Add https functionality
+
+### Using docker
+- Build image
+  ``` docker image build -t flask ```
+- Run container
+  ``` docker container run -v $(pwd):/app -p 5000:5000 flask ```
+
+

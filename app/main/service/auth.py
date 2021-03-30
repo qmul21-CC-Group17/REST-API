@@ -92,7 +92,7 @@ class AuthHelper:
                 return {
                     'status': 'fail',
                     'message': resp
-                }
+                }, 401
         return {
             'status': 'fail',
             'message': 'provide valid token'

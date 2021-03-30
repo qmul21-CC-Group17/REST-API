@@ -11,10 +11,5 @@ app.register_blueprint(blueprint)
 migrate = Migrate(app, db)
 Migrate(app, db)
 
-def run():
-    app.run()
-
 if __name__ == '__main__':
-    run()
-
-
+    app.run(host='0.0.0.0')
