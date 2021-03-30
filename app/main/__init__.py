@@ -2,6 +2,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
+import pymysql
+
+#this line helps with an error
+pymysql.install_as_MySQLdb()
+
 from.config import Config
 flask_bcrypt = Bcrypt()
 db = SQLAlchemy()
