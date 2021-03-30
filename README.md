@@ -16,14 +16,20 @@
 #### open swagger docs in the brower by fllowing the base url
 
 ## Using docker
-#### Build image
-  ``` docker image build -t flask ```
-#### Run container
-  ``` docker container run -v $(pwd):/app -p 5000:5000 flask ```
-#### open swagger docs in the brower by fllowing the base url
+#### Start your EC2 instance
+#### Update the system and install docker 
+```sudo apt update```
+```sudo apt install docker.io```
+#### Move to the directory with the app
+```cd REST-API-main```
+#### Build the flask instance
+```sudo docker build . --tag=flask:v1```
+#### Run the instance
+```sudo docker run -p 80:80 flask```
+####Swagger docks should now be accessible via public DNS of the instance
 
 ## Setting the database for the first time
-
+This only needs to be done once on an empty AWS RDS MySQL database
 #### install packages
 ``` pip install -r requirements.txt ```
 #### db setup
