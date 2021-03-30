@@ -6,7 +6,7 @@
 # REST-API - JOB SEARCH WEB-APPLICATION
 
 This application allows a user to create an account and search for full-time or part-time IT positions of any kind in any given location. The application makes use of the <b> GitHub Jobs Public API to return a JSON response of all the jobs for the given information.</b>
-The app is <b>dockerized</b> and can be run on a <b>virtual machine on AWS</b>. 
+The app is <b>dockerized</b> and can be run on <b>AWS Server</b>. 
 
 ## Dynamic REST-API CRUD Operations: 
 The REST API responses conform to REST standards and return appropriate messages along with <b>RESPONSE CODES.</b>
@@ -25,7 +25,7 @@ The REST API responses conform to REST standards and return appropriate messages
 - DELETE_USER method allows a logged in user to delete their own account only.
 
 ## Interaction with External REST Service:
-GET_JOBS method uses the <a href="https://jobs.github.com/api" GITHUB-JOBS API</a> to QUERY JOBS using the information provided by the user in the CREATE_USER POST method. THE API RETURNS A JSON RESPONSE of the list of jobs in the given location. This method can only be accessed after user_login. 
+GET_JOBS method uses the <a href="https://jobs.github.com/api">GITHUB-JOBS API</a> to QUERY JOBS using the information provided by the user in the CREATE_USER POST method. THE API RETURNS A JSON RESPONSE of the list of jobs in the given location. This method can only be accessed after user_login. 
 
 ## External Cloud Database:
 A remote access <b>MYSQL DATABASE hosted on AWS</b> is used by the web-application to store and retrieve persistent information such as: user details and blacklisted authorization tokens.
