@@ -18,7 +18,7 @@
 ## Using docker
 #### Start your EC2 instance
 #### Update the system and install docker 
-```sudo apt update```
+```sudo apt update```<br>
 ```sudo apt install docker.io```
 #### Move to the directory with the app
 ```cd REST-API-main```
