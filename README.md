@@ -17,9 +17,9 @@
 ### open swagger docs in the brower by fllowing the base url
 
 ### To do
-- My SQL db setup
-- Dockerize application
-- Add https functionality
+- My SQL db setup - by Maciej
+- Add https functionality - by Nishant 
+- README update and code comments
 
 ### Using docker
 - Build image
