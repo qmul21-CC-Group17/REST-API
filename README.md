@@ -30,6 +30,10 @@ GET_JOBS method uses the <a href="https://jobs.github.com/api">GITHUB-JOBS API</
 ## External Cloud Database:
 A remote access <b>MYSQL DATABASE hosted on AWS</b> is used by the web-application to store and retrieve persistent information such as: user details and blacklisted authorization tokens.
 
+THE DATABASE consists of 2 TABLES:
+ - USER TABLE consists of fields: id, username, email, password (hashed), keyword (job-name), full-time (true/false), location and Authorization(admin/user roles)
+ - BLACKLISTED TABLE consists of fields: id (user id), token(JWT Token), blacklisted_on(time when token was added to table)
+
 ## Serving the Application over HTTPS:
 - TO DO 
 
@@ -47,7 +51,7 @@ When a user is logging in, the user is AUTHENTICATED BY HASHING THE ENTERED PASS
 ### ADMIN & USER Roles
 - USER role is only allowed to access the method create__user, get_jobs, update_user to update their own details, and delete_user to delete ONLY THEIR OWN ACCOUNT. 
 - ADMIN role is allowed to use the method list_users to see all the details of the user-role users who have accounts on the app. 
-<b>THE ROLES AND THEIR AUTHORIZATION ARE VERIFIED USING VALID ADMIN JWTs. THUS ONLY ADMIN HAS TRUE ACCESS TO THE USER DATABASE, THUS SECURING THE DATABASE. </b>
+<b>THE ROLES AND THEIR AUTHORIZATION ARE VERIFIED BY THE 'Authorization' FIELD IN USER TABLE. THUS ONLY ADMIN HAS TRUE ACCESS TO THE USER DATABASE, THUS SECURING THE DATABASE. </b>
  ONE ADMIN ACCOUNT IS CREATED UPON RUNNING FIRST INSTANCE OF THE APP.
 
 ## Requirements: 
