@@ -9,3 +9,4 @@ requests
 SQLAlchemy
 mysqlclient
 mysql-connector
+pymysql
