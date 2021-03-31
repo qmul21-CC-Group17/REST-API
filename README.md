@@ -12,17 +12,20 @@ The app is <b>dockerized</b> and can be run on <b>AWS Server</b>.
 The REST API responses conform to REST standards and return appropriate messages along with <b>RESPONSE CODES.</b>
 
 ### GET
- - GET_JOBS method uses the external API and returns a list of jobs for the given parameters: job-name, location, full-time(true/false)
- - LIST_USERS method returns the list of users who have an account in the database used by the app. This method is only accessible by an ADMIN USER.
+ - GET_JOBS method uses the external API and returns a list of jobs for the given parameters: job-name/keyword, location, full-time(true/false)
+ - LIST_USERS method returns the list of users who have an account in the database used by the app. ONLY ACCESSIBLE BY ADMIN USER.
+ - GET_USER_BY_ID method returns the details of a specific user when id is specified as the request argument. ONLY ACCESSIBLE BY ADMIN USER
  
 ### POST 
-- CREATE_USER method allows a user to register a new account with the webapp and therefore creates a new user in the user database with the following fields: username, password (encrypted hash using bcrypt algorithm), full-time (true/false), job-name, email and location. 
+- CREATE_USER method allows a user to register a new account with the webapp and therefore creates a new user in the user database with the following fields: username, password (encrypted hash using bcrypt algorithm), full-time (true/false), job-name/keyword, email and location. 
+- AUTH_LOGIN method allows a user or admin to login to their account. A JSON WEB TOKEN IS RETURNED AS RESPONSE if valid username and password is provided.
+- AUTH_LOGOUT method allows a user to logout of their account. THE JWT IS ADDED TO BLACKLISTED TOKENS so it cannot be used again.
 
 ### PUT 
-- UPDATE_USER method allows a logged in user to update their details namely: job-name, location, full-time and username. 
+- UPDATE_USER method allows a logged in user to update their details namely: job-name/keyword, location, full-time and username. 
 
 ### DELETE
-- DELETE_USER method allows a logged in user to delete their own account only.
+- DELETE_USER method allows the deletion of a user account. ONLY ADMIN CAN USE THIS METHOD.
 
 ## Interaction with External REST Service:
 GET_JOBS method uses the <a href="https://jobs.github.com/api">GITHUB-JOBS API</a> to QUERY JOBS using the information provided by the user in the CREATE_USER POST method. THE API RETURNS A JSON RESPONSE of the list of jobs in the given location. This method can only be accessed after user_login. 
@@ -47,11 +50,14 @@ When a user is logging in, the user is AUTHENTICATED BY HASHING THE ENTERED PASS
 ### JWT for Keeping Track of Sessions and Authorization
 <b>JSON WEB TOKENS are generated every time a user registers or logs in</b>. This token is used to create a <b>SESSION</b> for the user that will last <b>upto 24-hours unless they logout</b>. This token is then used to access REST METHODS that require user login. <b>ONLY VALID TOKENS are authorized to perform CRUD operations</b>. Once the user is logged out, the TOKEN is <b> added to the list of blacklisted tokens</b> so that it may never be used again. Thus <b>securing the application.</b>
 
+### Admin status verification for certain functionalities
+A field in the database makes note of the user account's status as Admin. Only admin users may access the methods LIST_USERS GET_USER_BY_ID and DELETE_USER. Therefore access is managed by verifying whether the user is LOGGED IN and if THEY ARE ADMINS.
+
 ## Securing the Database with Role-Based Policies:
 ### ADMIN & USER Roles
-- USER role is only allowed to access the method create__user, get_jobs, update_user to update their own details, and delete_user to delete ONLY THEIR OWN ACCOUNT. 
-- ADMIN role is allowed to use the method list_users to see all the details of the user-role users who have accounts on the app. 
-<b>THE ROLES AND THEIR AUTHORIZATION ARE VERIFIED BY THE 'Authorization' FIELD IN USER TABLE. THUS ONLY ADMIN HAS TRUE ACCESS TO THE USER DATABASE, THUS SECURING THE DATABASE. </b>
+- USER role is only allowed to access the methods GET_JOBS CREATE_USER, AUTH_LOGIN, AUTH_LOGOUT, UPDATE_USER to update their own details. 
+- Only ADMIN role is allowed to use the methods LIST_USERS to see all the details of all users, GET_USER_BY_ID to see details of one user specifically, DELETE_USER to delete a user account.
+<b>THE ROLES AND THEIR AUTHORIZATION ARE VERIFIED BY THE 'Authorization' FIELD IN USER TABLE. ONLY ADMIN HAS TRUE ACCESS TO THE USER DATABASE, THUS SECURING THE DATABASE. </b>
  ONE ADMIN ACCOUNT IS CREATED UPON RUNNING FIRST INSTANCE OF THE APP.
 
 ## Requirements: 
