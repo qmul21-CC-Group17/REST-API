@@ -10,7 +10,6 @@ api = UserDto.api
 _user = UserDto.user
 
 parser = api.parser()
-parser.add_argument('Authorization', location='headers')
 parser.add_argument('username', location='json')
 parser.add_argument('email', location='json')
 parser.add_argument('password', location='json')
@@ -28,7 +27,7 @@ class UserList(Resource):
     @api.doc('List users')
     @api.expect(auth_parser)
     @admin_token_required
-    @api.marshal_with(_user, mask='username,email,location,keyword,full_time')
+    @api.marshal_with(_user, mask='id,username,email,location,keyword,full_time')
     def get(self):
         """List all users (Admin access required)"""
         return get_all_users()
