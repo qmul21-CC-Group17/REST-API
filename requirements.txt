@@ -10,3 +10,4 @@ SQLAlchemy
 mysqlclient
 mysql-connector
 pymysql
+pyopenssl
