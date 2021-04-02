@@ -1,9 +1,6 @@
 from app.main.model.user import User
 from app.main import db
 
-import uuid
-
-
 def save_new_user(data):
     user_exist = User.query.filter_by(username=data['username']).first(
     ) or User.query.filter_by(email=data['email']).first()
@@ -25,6 +22,12 @@ def save_new_user(data):
     save_user(user)
     return {
             'status': 'success',
+            'user ID': User.query.filter_by(username=user.username)[0].id,
+            'username': user.username,
+            'email': user.email,
+            'full_time': user.full_time,
+            'location': user.location,
+            'keyword': user.keyword,
             'message': "please login with your email id and password"
         }, 201
 

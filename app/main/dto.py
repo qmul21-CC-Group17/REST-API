@@ -5,12 +5,13 @@ from app.main.service.auth import AuthHelper
 class UserDto:
     api = Namespace('User', 'User operations')
     user = api.model('user', {
+        'id': fields.Integer(required=False, description='unique identifier'),
         'email': fields.String(required=True, description='user email address'),
         'username': fields.String(required=True, description='user username'),
         'password': fields.String(required=True, description='user password'),
         'keyword': fields.String(required=True, description='Area of interest'),
         'location': fields.String(required=True, description='Location'),
-        'full_time': fields.Boolean(default=True, description='Are you searching for full time job?')
+        'full_time': fields.Boolean(default=True, description='Are you searching for full time job?'),
     })
 
 class AuthDto:
