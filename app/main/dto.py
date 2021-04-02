@@ -5,6 +5,7 @@ from app.main.service.auth import AuthHelper
 class UserDto:
     api = Namespace('User', 'User operations')
     user = api.model('user', {
+        'id': fields.Integer(required=False, description='unique identifier'),
         'email': fields.String(required=True, description='user email address'),
         'username': fields.String(required=True, description='user username'),
         'password': fields.String(required=True, description='user password'),
