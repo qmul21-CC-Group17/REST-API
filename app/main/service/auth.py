@@ -20,8 +20,7 @@ class AuthHelper:
                     return {
                         'status': 'success',
                         'message': 'logged in successfully',
-                        'Auth': auth_token,
-                        'id': user.id
+                        'Auth': auth_token
                     }, 200
             else:
                 return {
