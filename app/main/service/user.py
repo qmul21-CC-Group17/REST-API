@@ -28,7 +28,7 @@ def save_new_user(data):
             'full_time': user.full_time,
             'location': user.location,
             'keyword': user.keyword,
-            'message': "please login with your email id and password"
+            'message': "please login with your username and password"
         }, 201
 
 def update_existing_user(data, id):
