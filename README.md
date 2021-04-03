@@ -86,8 +86,8 @@ mysqlclient, mysql-connector, pymysql
 #### Build the flask instance
 ```sudo docker build . --tag=flask:v1```
 #### Run the instance
-```sudo docker run -p 80:80 flask```
-####Swagger docks should now be accessible via public DNS of the instance
+```sudo docker run -p 80:80 flask:v1```<br>
+#### Swagger docks should now be accessible via public DNS of the instance
 
 ## Setting the database for the first time
 This only needs to be done once on an empty AWS RDS MySQL database
