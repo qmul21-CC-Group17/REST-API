@@ -1,7 +1,6 @@
-## To do
-- Test the app on AWS
-- Add https functionality - by Nishant 
-- README update and code comments
+# ECS781P Cloud Computing Group 17
+Members:<br>
+- Maciej Tarsa (210271247)<br>
 
 # REST-API - JOB SEARCH WEB-APPLICATION
 
@@ -71,7 +70,7 @@ mysqlclient, mysql-connector, pymysql
 ### start flask server
 ``` python run.py ```
 
-### open swagger docs in the brower by fllowing the base url
+### open swagger docs in the brower by following the base url
 
 ## Using Docker on AWS
 ### Start your EC2 instance
