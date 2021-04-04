@@ -14,7 +14,7 @@ parser.add_argument('username', location='json')
 parser.add_argument('email', location='json')
 parser.add_argument('password', location='json')
 parser.add_argument('location', location='json')
-parser.add_argument('full_time', location='json')
+parser.add_argument('full_time', type=bool ,location='json')
 parser.add_argument('keyword', location='json')
 
 
@@ -24,6 +24,16 @@ auth_parser.add_argument('Authorization', location='headers')
 
 @api.route('/')
 class UserList(Resource):
+
+    @api.expect(parser, validate=True, )
+    @api.response(201, 'User successfully created.')
+    @api.doc('create a new user')
+    def post(self):
+        """Create new user"""
+        data = request.json
+        return save_new_user(data=data)
+    
+
     @api.doc('List users')
     @api.expect(auth_parser)
     @admin_token_required
@@ -31,14 +41,23 @@ class UserList(Resource):
     def get(self):
         """List all users (Admin access required)"""
         return get_all_users()
-
-    @api.expect(_user, validate=True)
-    @api.response(201, 'User successfully created.')
-    @api.doc('create a new user')
-    def post(self):
-        """Create new user"""
-        data = request.json
-        return save_new_user(data=data)
+    
+    @api.doc('Update user details')
+    @api.expect(auth_parser, parser)
+    @login_required
+    def patch(self):
+        """Update user details"""
+        
+        resp = AuthHelper.get_loged_in_user(request)
+        if resp[0]['status'] == 'success':
+            user_id = resp[0]['user_data']['user_id']
+            data = request.json
+            return update_existing_user(data, user_id)
+        else:
+            return {
+                'status': 'fail',
+                'message': 'only logined user can update details'
+            }, 401
 
 
 @api.route('/<id>')
@@ -57,24 +76,6 @@ class User(Resource):
             api.abort(404)
         else:
             return user, 200
-
-    @api.doc('Update user details')
-    @api.expect(parser)
-    @login_required
-    def patch(self, id):
-        """Update user details"""
-        
-        resp = AuthHelper.get_loged_in_user(request)
-        if resp[0]['status'] == 'success':
-            user_id = resp[0]['user_data']['user_id']
-            if user_id == int(id):
-                data = request.json
-                return update_existing_user(data, user_id)
-            else:
-                return {
-                    'status': 'fail',
-                    'message': 'only logined user can update details'
-                }, 401
 
     @api.expect(auth_parser)
     @admin_token_required
