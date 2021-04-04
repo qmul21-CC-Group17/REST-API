@@ -47,7 +47,7 @@ class UserList(Resource):
 class User(Resource):
     @api.expect(auth_parser)
     @admin_token_required
-    @api.marshal_with(_user, mask='password')
+    @api.marshal_with(_user, mask='id,username,email,location,keyword,full_time')
     @api.doc('Get user by ID (Admin access required)')
     def get(self, id):
         """"Get user by ID (Admin access required)"""
