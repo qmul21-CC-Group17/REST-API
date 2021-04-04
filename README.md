@@ -1,5 +1,8 @@
-# ECS781P Cloud Computing Group 17
-Members:<br>
+# Job retrieval API
+
+### ECS781P Cloud Computing Group 17
+
+### Members:
 - Maciej Tarsa (210271247)<br>
 
 # REST-API - JOB SEARCH WEB-APPLICATION
