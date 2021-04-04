@@ -31,7 +31,7 @@ The REST API responses conform to REST standards and return appropriate messages
 - DELETE_USER method allows the deletion of a user account. ONLY ADMIN CAN USE THIS METHOD.
 
 ## Interaction with External REST Service:
-GET_JOBS method uses the <a href="https://jobs.github.com/api">GITHUB-JOBS API</a> to QUERY JOBS using the information provided by the user in the CREATE_USER POST method. THE API RETURNS A JSON RESPONSE of the list of jobs in the given location. This method can only be accessed after user_login. If user wants different parameters for this method, they must use USER_UPDATE method and change their job-name/keyword, location or full-time fields before running GET_JOBS.
+GET_JOBS method uses the <a href="https://jobs.github.com/api">GITHUB-JOBS API</a> to QUERY JOBS using the information provided by the user in the CREATE_USER POST method. THE API RETURNS A JSON RESPONSE of the list of jobs in the given location. This method can only be accessed after user_login. If user wants different parameters for this method, they must use UPDATE_USER method and change their job-name/keyword, location or full-time fields before running GET_JOBS.
 
 ## External Cloud Database:
 A remote access <b>MYSQL DATABASE hosted on AWS</b> is used by the web-application to store and retrieve persistent information such as: user details and blacklisted authorization tokens.
