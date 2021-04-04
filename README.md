@@ -2,6 +2,9 @@
 
 ### Members:
 - Maciej Tarsa (210271247)<br>
+- Jyothsna Puttanna (200033235)
+- Shreyas Bhat
+- Ajay Munjamani
 
 # REST-API - JOB SEARCH WEB-APPLICATION
 
