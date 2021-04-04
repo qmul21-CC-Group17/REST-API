@@ -1,5 +1,3 @@
-# Job retrieval API
-
 ### ECS781P Cloud Computing Group 17
 
 ### Members:
