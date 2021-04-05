@@ -1,3 +1,4 @@
+#function to save blacklisted tokens once a user logs out
 from app.main.model.auth import BlackListToken
 from app.main import db
 
