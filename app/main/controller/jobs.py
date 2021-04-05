@@ -1,3 +1,4 @@
+#defining endpoints for get_jobs method 
 from flask import request, jsonify
 import requests
 from app.main.dto import JobDto
@@ -17,13 +18,13 @@ class JobList(Resource):
     @api.doc('Search job for current user')
     @api.expect(parser)
     @login_required
-    def get(self):
+    def get(self): # parameters sent in the request made to the external api
         """Search job for current user"""
         resp = AuthHelper.get_loged_in_user(request)
         if resp[0]['status'] == 'success':
             user_data = resp[0]['user_data']
             print(user_data)
-            job_template = 'https://jobs.github.com/positions.json?description={job}&location={loc}&full_time={fu}'
+            job_template = 'https://jobs.github.com/positions.json?description={job}&location={loc}&full_time={fu}' # actual request format for github jobs public api
             desc = user_data['keyword']
             location = user_data['location']
             desc = desc.replace(" ","+")
