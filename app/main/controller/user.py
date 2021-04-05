@@ -1,3 +1,4 @@
+# functions defined for CRUD operations and the validation of roles and authorization tokens
 from flask import request
 from flask_restx import Resource
 
