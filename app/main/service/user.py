@@ -1,3 +1,4 @@
+#defines the many CRUD operations on user databases along with the response messages
 from app.main.model.user import User
 from app.main import db
 
