@@ -1,3 +1,5 @@
+# Initializes database objects and creates method to launch
+#  flask application
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
