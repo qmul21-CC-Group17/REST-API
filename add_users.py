@@ -2,7 +2,7 @@ from app.main.model.user import User
 from app.main import db
 from run import app
 
-####Fill sample users into db along with admin
+####Fill sample users into db along with admin for testing purposes. to be run the first time the app is installed. 
 
 
 samples = [['Jyothsna', 'jyothsna@gamil.com', 'jyothsna123', 'cloud', True, 'London'],
@@ -12,7 +12,7 @@ samples = [['Jyothsna', 'jyothsna@gamil.com', 'jyothsna123', 'cloud', True, 'Lon
         ['Admin', 'admin@job_search.com', 'admin']]
 
 attrs = ['username', 'email', 'password', 'keyword', 'full_time', 'location']
-
+#adds the above sample users into the db then commits them. Sets admin value = true for user with the username Admin. 
 def load_db():
     with app.app_context():
         User.query.delete()
