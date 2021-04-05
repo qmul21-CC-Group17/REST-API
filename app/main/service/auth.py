@@ -15,7 +15,7 @@ class AuthHelper:
         try:
             user = User.query.filter_by(username=data['username']).first()
             if user and user.check_password(data['password']):
-                auth_token = user.generate_auth_token(user.id)
+                auth_token = user.generate_auth_token(user.id) #JSON WEB TOKEN GENERATED
                 if auth_token:
                     return {
                         'status': 'success',
@@ -41,9 +41,9 @@ class AuthHelper:
             auth_token = data.split(' ')[1]
         else:
             auth_token = None
-
+            
         if auth_token:
-            resp = User.decode_auth_token(auth_token)
+            resp = User.decode_auth_token(auth_token) #decodes the auth token, returns id if valid. if expired, returns expired token error
             print(type(resp))
             if isinstance(resp, int):
                 return save_token(auth_token)
