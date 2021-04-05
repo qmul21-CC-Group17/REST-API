@@ -7,8 +7,8 @@ from app.main.model.user import User
 from app.main.model.auth import BlackListToken
 
 app = create_app()
-app.register_blueprint(blueprint)
-migrate = Migrate(app, db)
+app.register_blueprint(blueprint) #registering all the endpoints, and to display in swagger
+migrate = Migrate(app, db) # Identifies what db it is and creates tables: creates a migrate folder with the db properties. run only first time.
 Migrate(app, db)
 
 if __name__ == '__main__':
