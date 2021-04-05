@@ -1,3 +1,4 @@
+#initializing the way the base URL of the app looks in swagger 
 from app.main.controller.auth import api as auth_api
 from app.main.controller.user import api as user_api
 from app.main.controller.jobs import api as jobs_api
