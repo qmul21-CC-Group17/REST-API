@@ -1,3 +1,4 @@
+#db queries defined for blacklist tokens table in the MYSQL database
 from .. import db
 import datetime
 
