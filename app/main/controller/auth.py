@@ -1,3 +1,5 @@
+#defining endpoints for auth i.e. login and logout methods
+
 from app.main.service.auth import AuthHelper
 from app.main.decorator import login_required
 from app.main.dto import AuthDto
@@ -10,13 +12,13 @@ user_auth = AuthDto.user_auth
 parser = api.parser()
 
 @api.doc('Login user')
-@api.route('/login')
-class UserLogin(Resource):
+@api.route('/login') # linked to /login function
+class UserLogin(Resource): #set of end points used to update the entries in the table
     """"
     User login
     """
     @api.doc('User login')
-    @api.expect(user_auth, validate=True)
+    @api.expect(user_auth, validate=True) # checking if the parameters are passed
     def post(self):
         """Login user by generating JWT token"""
         data = request.json
