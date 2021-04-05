@@ -1,3 +1,4 @@
+#this file defines the messages to display when invalid logins and tokens are encountered in the app
 from flask import request
 from functools import wraps
 from app.main.service.auth import AuthHelper
