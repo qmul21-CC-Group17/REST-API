@@ -1,3 +1,4 @@
+#file defines the configurations of the app when it is run, defining the database url, base directory and secret key for hashing
 import os
 
 base_dir = os.path.abspath(os.path.dirname(__file__)) #absolute base directory path
