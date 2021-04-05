@@ -1,7 +1,8 @@
 import os
 
-base_dir = os.path.abspath(os.path.dirname(__file__))
+base_dir = os.path.abspath(os.path.dirname(__file__)) #absolute base directory path
 
+#create config object
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'super_secret_key')
     # format: (user):(password)@(db_identifier).amazonaws.com:3306/(db_name)
