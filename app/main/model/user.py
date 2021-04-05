@@ -1,3 +1,5 @@
+#db queries defined for the operations on USER table in MYSQL database using SQLAlchemy
+
 from .. import db, flask_bcrypt
 from app.main.model.auth import BlackListToken
 from app.main.config import secret_key
