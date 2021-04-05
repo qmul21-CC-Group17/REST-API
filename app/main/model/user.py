@@ -1,4 +1,4 @@
-#db queries defined for the operations on USER table in MYSQL database using SQLAlchemy
+# db queries defined for the operations on USER table in MYSQL database using SQLAlchemy
 
 from .. import db, flask_bcrypt
 from app.main.model.auth import BlackListToken
@@ -8,7 +8,7 @@ import jwt
 import datetime
 
 
-class User(db.Model):
+class User(db.Model): 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
     registered_on = db.Column(db.DateTime, nullable=False)
@@ -38,7 +38,7 @@ class User(db.Model):
           Generate an auth token
         """
 
-        try:
+        try: # checks if the tokens are valid because its making note of the time of login
             payload = {
                 'iat': datetime.datetime.utcnow(),
                 'exp': datetime.datetime.utcnow()+datetime.timedelta(days=1, seconds=5),
@@ -48,7 +48,7 @@ class User(db.Model):
             return jwt.encode(
              payload,
              secret_key, 
-             algorithm='HS256'
+             algorithm='HS256' # hash algorithm applied for auth token
             )
             
 
@@ -78,3 +78,4 @@ class User(db.Model):
     
     def __repr__(self):
         return "<User '{}'>".format(self.username)
+# all these functions are defined under db.user 
